@@ -59,21 +59,21 @@ public class RecordedSimulation extends Simulation {
       http("request_0")
         .get("/api/videogame")
         .headers(headers_0),
-      pause(27),
+      pause(1),
       http("request_1")
         .get("/api/videogame/10")
         .headers(headers_0),
-      pause(10),
+      pause(1),
       http("request_2")
         .post("/api/authenticate")
         .headers(headers_2)
         .body(RawFileBody("io/gatling/demo/recordedsimulation/0002_request.json")),
-      pause(6),
+      pause(1),
       http("request_3")
         .post("/api/authenticate")
         .headers(headers_2)
         .body(RawFileBody("io/gatling/demo/recordedsimulation/0003_request.json")),
-      pause(50),
+      pause(1),
       http("request_4")
         .post("/api/videogame")
         .headers(headers_4)
