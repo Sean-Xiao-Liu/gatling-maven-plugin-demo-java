@@ -27,3 +27,7 @@ To run tests， use command:
 ```
 ./mvnw gatling:test
 ```
+or
+```
+mvn gatling:test
+```
