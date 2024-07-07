@@ -21,8 +21,25 @@ public class FirstTest extends Simulation{
     // 2. Scenario Definition
     private ScenarioBuilder scenarioBuilder = scenario("First Test")
             .exec( // chain of calls to make
-                    http("Get all games") // this the name of this request, can be anything
-                            .get("/videogame") // this the request based on baseUrl, change the method to post(), put() etc as needed
+                    http("Get all games - 1st call") // this the name of this request, can be anything
+                            .get("/videogame"), // this the request based on baseUrl, change the method to post(), put() etc as needed
+                    pause(2), // pause for 2 sec
+                    http("Get specific game")
+                            .get("/videogame/1"),
+                    pause(1,5), // randomly pause from 1 to 5 sec
+                    http("Get specific game again")
+                            .get("/videogame/2")
+
+            )
+            .exec( // chain of calls to make
+                    http("Get all games - 1st call") // this the name of this request, can be anything
+                            .get("/videogame"), // this the request based on baseUrl, change the method to post(), put() etc as needed
+                    pause(2), // pause for 2 sec
+                    http("Get specific game")
+                            .get("/videogame/1"),
+                    pause(1,5), // randomly pause from 1 to 5 sec
+                    http("Get specific game again")
+                            .get("/videogame/2")
             );
 
     // 3. Load Simulation
