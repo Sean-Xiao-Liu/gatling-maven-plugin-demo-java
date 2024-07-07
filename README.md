@@ -7,6 +7,11 @@ A simple showcase of a Maven project using the Gatling plugin for Maven. Refer t
 This project is written in Java, others are available for [Kotlin](https://github.com/gatling/gatling-maven-plugin-demo-kotlin)
 and [Scala](https://github.com/gatling/gatling-maven-plugin-demo-scala).
 
+To Run tests， use command
+```
+./mvnw gatling:test
+```
+
 It includes:
 
 * [Maven Wrapper](https://maven.apache.org/wrapper/), so that you can immediately run Maven with `./mvnw` without having
