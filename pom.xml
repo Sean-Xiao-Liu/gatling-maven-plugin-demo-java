@@ -71,6 +71,7 @@
             <configuration>
               <executable>bash</executable>
               <arguments>
+                <argument>-c</argument>
                 <argument>${project.basedir}/clean_old_gatling_reports.sh</argument>
               </arguments>
             </configuration>

@@ -31,3 +31,8 @@ or
 ```
 mvn gatling:test
 ```
+Run the shell file <code>clean_old_gatling_reports.sh</code> to delete old Gatling reports
+```
+ ./clean_old_gatling_reports.sh
+
+```
