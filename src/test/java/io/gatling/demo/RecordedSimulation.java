@@ -53,7 +53,11 @@ public class RecordedSimulation extends Simulation {
     Map.entry("sec-ch-ua-platform", "macOS")
   );
 
-
+  /**
+   * In Gatling, the RawFileBody method by default looks for resources in the resources directory,
+   * specifically under src/test/resources when using a standard Maven or Gradle project structure.
+   * However, you need to ensure that the path specified in RawFileBody is relative to the resources folder.
+   */
   private ScenarioBuilder scn = scenario("RecordedSimulation")
     .exec(
       http("request_0")
@@ -67,20 +71,20 @@ public class RecordedSimulation extends Simulation {
       http("request_2")
         .post("/api/authenticate")
         .headers(headers_2)
-        .body(RawFileBody("io/gatling/demo/recordedsimulation/0002_request.json")),
+        .body(RawFileBody("0002_request.json")),
       pause(1),
       http("request_3")
         .post("/api/authenticate")
         .headers(headers_2)
-        .body(RawFileBody("io/gatling/demo/recordedsimulation/0003_request.json")),
+        .body(RawFileBody("0003_request.json")),
       pause(1),
       http("request_4")
         .post("/api/videogame")
         .headers(headers_4)
-        .body(RawFileBody("io/gatling/demo/recordedsimulation/0004_request.json"))
+        .body(RawFileBody("0004_request.json"))
     );
 
   {
-	  setUp(scn.injectOpen(atOnceUsers(1))).protocols(httpProtocol);
+	  setUp(scn.injectOpen(atOnceUsers(10))).protocols(httpProtocol);
   }
 }
