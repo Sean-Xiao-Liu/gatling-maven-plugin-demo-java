@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "gatling": "^2.0.0"
+  }
+}
