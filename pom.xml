@@ -48,12 +48,32 @@
           <!-- Enterprise Cloud (https://cloud.gatling.io/) configuration reference: https://gatling.io/docs/gatling/reference/current/extensions/maven_plugin/#working-with-gatling-enterprise-cloud -->
           <!-- Enterprise Self-Hosted configuration reference: https://gatling.io/docs/gatling/reference/current/extensions/maven_plugin/#working-with-gatling-enterprise-self-hosted -->
         </configuration>
+<!--        <executions>-->
+<!--          <execution>-->
+<!--            <goals>-->
+<!--              <goal>recorder</goal>-->
+<!--              <goal>test</goal>-->
+<!--            </goals>-->
+<!--          </execution>-->
+<!--        </executions>-->
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>3.0.0</version>
         <executions>
           <execution>
+            <id>clean-old-gatling-reports</id>
+            <phase>post-integration-test</phase>
             <goals>
-              <goal>recorder</goal>
-              <goal>test</goal>
+              <goal>exec</goal>
             </goals>
+            <configuration>
+              <executable>bash</executable>
+              <arguments>
+                <argument>${project.basedir}/clean_old_gatling_reports.sh</argument>
+              </arguments>
+            </configuration>
           </execution>
         </executions>
       </plugin>
