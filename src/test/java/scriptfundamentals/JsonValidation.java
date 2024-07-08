@@ -14,7 +14,7 @@ import static io.gatling.javaapi.http.HttpDsl.*;
  * 2. Scenario Definition
  * 3. Load Simulation
  */
-public class FirstTest extends Simulation {
+public class JsonValidation extends Simulation {
 
     private JsonNode expectedJson;
 
@@ -24,7 +24,7 @@ public class FirstTest extends Simulation {
         return mapper.readTree(inputStream);
     }
 
-    public FirstTest() {
+    public JsonValidation() {
         try {
             expectedJson = readResourceFileAsString("Resident_Evil_4.json");
         } catch (Exception e) {
