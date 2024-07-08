@@ -17,13 +17,14 @@ It includes:
   demonstrating sufficient Gatling functionality
 * proper source file layout
 
+**Here are the commands to run tests**
 
-To use recorder, use command:
+1. To use recorder, use command:
 ```
 mvn gatling:recorder
 ```
 
-To run tests， use command:
+2. To run tests, use command:
 ```
 ./mvnw gatling:test
 ```
@@ -31,7 +32,9 @@ or
 ```
 mvn gatling:test
 ```
-Run the shell file <code>clean_old_gatling_reports.sh</code> to delete old Gatling reports
+3. To run all the tests without choosing the simulation class, uncomment the line <code>\<runMultipleSimulations>true\</runMultipleSimulations></code>
+   in the <code>pom.xml</code> file
+4. Run the shell file <code>clean_old_gatling_reports.sh</code> to delete old Gatling reports
 ```
  ./clean_old_gatling_reports.sh
 
