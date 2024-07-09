@@ -4,7 +4,9 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.gatling.javaapi.core.*;
 import io.gatling.javaapi.http.*;
+
 import java.io.InputStream;
+
 import static io.gatling.javaapi.core.CoreDsl.*;
 import static io.gatling.javaapi.http.HttpDsl.*;
 
@@ -17,20 +19,21 @@ import static io.gatling.javaapi.http.HttpDsl.*;
 public class JsonValidation extends Simulation {
 
     private JsonNode expectedJson;
-
-    private JsonNode readResourceFileAsString(String fileName) throws Exception {
-        ObjectMapper mapper = new ObjectMapper();
-        InputStream inputStream = getClass().getClassLoader().getResourceAsStream(fileName);
-        return mapper.readTree(inputStream);
-    }
+    ObjectMapper mapper;
 
     public JsonValidation() {
+        this.mapper = new ObjectMapper();
         try {
             expectedJson = readResourceFileAsString("Resident_Evil_4.json");
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException("Failed to read JSON file", e);
         }
+    }
+
+    private JsonNode readResourceFileAsString(String fileName) throws Exception {
+        InputStream inputStream = getClass().getClassLoader().getResourceAsStream(fileName);
+        return mapper.readTree(inputStream);
     }
 
     // 1. HTTP Configuration
@@ -48,7 +51,6 @@ public class JsonValidation extends Simulation {
                     http("Get specific game")
                             .get("/videogame/1")
                             .check(bodyString().transform(response -> {
-                                        ObjectMapper mapper = new ObjectMapper();
                                         try {
                                             JsonNode actualJson = mapper.readTree(response);
                                             return actualJson.equals(expectedJson);
@@ -61,17 +63,8 @@ public class JsonValidation extends Simulation {
                     pause(1, 5), // randomly pause from 1 to 5 sec
                     http("Get specific game again")
                             .get("/videogame/2")
+                            .check(status().not(400))
 
-            )
-            .exec( // chain of calls to make
-                    http("Get all games - 1st call") // this the name of this request, can be anything
-                            .get("/videogame"), // this the request based on baseUrl, change the method to post(), put() etc as needed
-                    pause(2), // pause for 2 sec
-                    http("Get specific game")
-                            .get("/videogame/1"),
-                    pause(1, 5), // randomly pause from 1 to 5 sec
-                    http("Get specific game again")
-                            .get("/videogame/2")
             );
 
     // 3. Load Simulation
