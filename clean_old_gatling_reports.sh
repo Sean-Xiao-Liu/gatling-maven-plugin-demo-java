@@ -5,17 +5,15 @@ RESULTS_DIR="target/gatling"
 
 # Check if the directory exists
 if [ -d "$RESULTS_DIR" ]; then
-  cd "$RESULTS_DIR"
-  echo "Current directory: $(pwd)"
+  echo "Gatling results directory exists. Current directory: $(pwd)"
+  cd $RESULTS_DIR
+  echo "Changed to Gatling results directory: $(pwd)"
+
   echo "Directories before cleaning:"
   ls -dt */
 
-  # Find all unique simulation class prefixes (excluding the timestamp part)
-  for sim_class in $(ls -dt */ | sed 's/-[0-9]\{14\}\///' | uniq); do
-    # List directories for each simulation class, sort them by modification time,
-    # skip the most recent one, and delete the others
-    ls -dt ${sim_class}-*/ | tail -n +2 | xargs rm -rf
-  done
+  # Find all directories, sort them by modification time, and skip the most recent one
+  ls -dt */ | tail -n +2 | xargs rm -rf
 
   echo "Directories after cleaning:"
   ls -dt */
