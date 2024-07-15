@@ -16,9 +16,13 @@ public class UseChainBuilder extends Simulation {
     private ScenarioBuilder scenarioBuilder = scenario("Use ChainBuilders")
             .exec(ChainBuilders.allGames);
 
+    private ScenarioBuilder scenarioBuilderTwo = scenario("Make looped http call")
+            .exec(ChainBuilders.allGamesThreeTimes);
+
     {
         setUp(
-                scenarioBuilder.injectOpen(atOnceUsers(1))
+                scenarioBuilder.injectOpen(atOnceUsers(1)),
+                scenarioBuilderTwo.injectOpen(atOnceUsers(1))
         ).protocols(httpProtocolBuilder);
     }
 }
