@@ -16,6 +16,12 @@ public class ChainBuilders {
                             .get("/videogame/1"))
             );
 
+    public static ChainBuilder getSpecificGame =
+            exec(http("get specific game")
+                    .get("/videogame/#{id}")
+                    .check(jmesPath("name")
+                            .isEL("#{name}"))); // make sure to use isEL here as it is using feeder
+
     public static ChainBuilder getAuthToken = exec(http("get authentication token")
             .post("/authenticate")
             .body(StringBody("" +
